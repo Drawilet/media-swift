@@ -1,0 +1,7 @@
+{
+    "youtube": {
+        "description": {
+            "maxLength": 80
+        }
+    }
+}
