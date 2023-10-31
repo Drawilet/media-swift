@@ -38,32 +38,32 @@ const HomePage = () => {
     a.download = filename;
     document.body.appendChild(a);
     a.click();
-    
+
     window.URL.revokeObjectURL(url);
   };
 
   return (
     <div className="flex justify-center flex-wrap">
       <h1 className="text-2xl text-center mb-4">Youtube Video Downloader</h1>
-      <div className="join mb-6">
+      <div className="join mb-6 max-sm:w-full">
         <input
           id="url"
-          className="input input-bordered join-item"
-          placeholder="Pase your link here"
+          className="input input-bordered join-item max-sm:w-full"
+          placeholder="Paste your link here"
           value={URL}
           onChange={handleURLChange}
         />
 
         <button
-          className="btn join-item capitalize bg-red-600 text-gray-100 "
+          className="btn btn-primary join-item capitalize"
           onClick={getInfo}
         >
-          Download
+          Search
         </button>
       </div>
 
       {info && (
-        <div className="card lg:card-side bg-base-100 shadow-xl">
+        <div className="card lg:card-side bg-base-100 shadow-xl max-sm:w-full">
           <figure className="relative h-44">
             <Img
               src={info.thumbnail}
@@ -78,7 +78,7 @@ const HomePage = () => {
             <p>{info.description}</p>
             <div className="card-actions justify-end">
               <button
-                className="btn bg-green-500 text-gray-100 capitalize"
+                className="btn bg-green-500 hover:bg-green-600 text-gray-100 capitalize"
                 onClick={download}
               >
                 Download
