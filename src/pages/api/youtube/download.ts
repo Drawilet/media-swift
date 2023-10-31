@@ -5,7 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { videoId: id } = req.query;
+  const { videoId: id, format } = req.query;
 
   if (!id) {
     return res.status(400).json({ error: "Missing videoId parameter" });
@@ -14,16 +14,15 @@ export default async function handler(
   try {
     const videoUrl = `https://www.youtube.com/watch?v=${id}`;
     const info = await ytdl.getInfo(videoUrl);
-    const format = ytdl.chooseFormat(
-      info.formats.filter((format) => format.hasVideo && format.hasAudio),
-      { quality: "highest" }
-    );
-    res.setHeader(
-      "Content-Disposition",
-      `attachment; filename="${info.videoDetails.title}.mp4"`
-    );
-    res.setHeader("Content-Type", "video/mp4");
-    ytdl(videoUrl, { format }).pipe(res);
+
+    const videoFormat = info.formats.filter(
+      (f) => f.itag === parseInt(format as string)
+    )[0];
+    const filename = `${info.videoDetails.title}.${videoFormat.container}`;
+
+    res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+    res.setHeader("Content-Type", `${videoFormat.mimeType}`);
+    ytdl(videoUrl, { format: videoFormat }).pipe(res);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to download video" });

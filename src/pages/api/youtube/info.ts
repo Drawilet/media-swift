@@ -28,6 +28,7 @@ export default async function handler(
         title: info.videoDetails.title,
         description,
         thumbnail: info.videoDetails.thumbnails[0].url,
+        formats: info.formats,
       };
     });
     return res.status(200).json(info);

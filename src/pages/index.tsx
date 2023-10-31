@@ -1,32 +1,42 @@
 import React, { ChangeEventHandler, useState } from "react";
 import Img from "next/image";
+import { videoFormat } from "ytdl-core";
 
+interface Info {
+  id: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  formats: videoFormat[];
+}
 const HomePage = () => {
-  const [URL, setURL] = useState("");
-  const handleURLChange: ChangeEventHandler<HTMLInputElement> = (e) =>
-    setURL(e.target.value);
+  const [data, setData] = useState({ url: "", format: "" });
+  const [info, setInfo] = useState<Info | undefined>(undefined);
 
-  const [info, setInfo] = useState<
-    | {
-        id: string;
-        title: string;
-        description: string;
-        thumbnail: string;
-      }
-    | undefined
-  >(undefined);
+  const handleChange: ChangeEventHandler<
+    HTMLInputElement | HTMLSelectElement
+  > = (e) => setData({ ...data, [e.target.id]: e.target.value });
+
   const getInfo = () => {
-    fetch("/api/youtube/info?url=" + URL)
+    setInfo(undefined);
+
+    fetch("/api/youtube/info?url=" + data.url)
       .then((res) => res.json())
       .then((info) => {
+        if (info.error) return alert(info.error);
         setInfo(info);
+        setData({ ...data, format: info.formats[0].itag });
+
+        console.log(info.formats);
       });
   };
 
   const download = async () => {
     if (!info) return;
 
-    const res = await fetch(`/api/youtube/download?videoId=${info.id}`);
+    const res = await fetch(
+      `/api/youtube/download?videoId=${info.id}&&format=${data.format}`
+    );
     const blob = await res.blob();
 
     const url = window.URL.createObjectURL(blob);
@@ -42,6 +52,17 @@ const HomePage = () => {
     window.URL.revokeObjectURL(url);
   };
 
+  const getQuality = (format: videoFormat) => {
+    if (format.qualityLabel) return format.qualityLabel;
+    if (format.audioQuality) {
+      if (format.audioQuality === "AUDIO_QUALITY_LOW") return "Low";
+      if (format.audioQuality === "AUDIO_QUALITY_MEDIUM") return "Medium";
+      if (format.audioQuality === "AUDIO_QUALITY_HIGH") return "High";
+    }
+    if (format.quality) return format.quality;
+    return "Unknown";
+  };
+
   return (
     <div className="flex justify-center flex-wrap">
       <h1 className="text-2xl text-center mb-4">Youtube Video Downloader</h1>
@@ -50,8 +71,8 @@ const HomePage = () => {
           id="url"
           className="input input-bordered join-item max-sm:w-full"
           placeholder="Paste your link here"
-          value={URL}
-          onChange={handleURLChange}
+          value={data.url}
+          onChange={handleChange}
         />
 
         <button
@@ -64,7 +85,7 @@ const HomePage = () => {
 
       {info && (
         <div className="card lg:card-side bg-base-100 shadow-xl max-sm:w-full">
-          <figure className="relative h-44">
+          <figure className="relative h-48">
             <Img
               src={info.thumbnail}
               alt="Video thumbnail"
@@ -76,13 +97,34 @@ const HomePage = () => {
           <div className="card-body">
             <h2 className="card-title">{info.title}</h2>
             <p>{info.description}</p>
+
             <div className="card-actions justify-end">
-              <button
-                className="btn bg-green-500 hover:bg-green-600 text-gray-100 capitalize"
-                onClick={download}
-              >
-                Download
-              </button>
+              <div className="join">
+                <select
+                  id="format"
+                  value={data.format}
+                  onChange={handleChange}
+                  className="select select-bordered join-item"
+                >
+                  {info.formats.map((format) => (
+                    <option
+                      key={format.itag}
+                      value={format.itag}
+                      className="flex justify-around"
+                    >
+                      {format.mimeType?.split(";")[0].toUpperCase()} (
+                      {getQuality(format)} )
+                    </option>
+                  ))}
+                </select>
+
+                <button
+                  className="btn join-item bg-green-500 hover:bg-green-600 text-gray-100 capitalize"
+                  onClick={download}
+                >
+                  Download
+                </button>
+              </div>
             </div>
           </div>
         </div>
