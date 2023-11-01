@@ -1,4 +1,5 @@
 import { createGlobalState } from "react-hooks-global-state";
+import { Notification } from "../../types/Notification";
 
 const initialState = {
   isLoading: false,

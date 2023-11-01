@@ -1,10 +1,11 @@
 import { useGlobalState } from "@/state/global";
+import { Notification } from "../../types/Notification";
 
 export const useNotifications = () => {
   const [notifications, setNotifications] = useGlobalState("notifications");
 
-  const addNotification = (type: string, message: string, icon: string) => {
-    setNotifications([...notifications, { type, message, icon }]);
+  const addNotification = (notification: Notification) => {
+    setNotifications([...notifications, notification]);
   };
 
   const removeNotification = (index: number) => {
