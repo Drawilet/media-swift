@@ -3,6 +3,12 @@ import React from "react";
 
 const features = [
   {
+    title: "Virus-Free",
+    description:
+      "Rest assured, our application is completely free of viruses and malware.",
+    icon: "fa-solid fa-shield",
+  },
+  {
     title: "Download Videos in Various Formats",
     description:
       "Choose from a wide range of video formats to suit your needs.",
