@@ -27,7 +27,7 @@ const HomePage = () => {
       <Youtube />
 
       <div className="mt-10">
-        <h3 className="text-2xl text-center">
+        <h3 className="text-2xl text-center" id="why-us">
           Why Choose Our Video Downloader?
         </h3>
 
