@@ -4,9 +4,13 @@ const links = [{ label: "Why Us?", href: "/#why-us" }];
 
 const Header: Component = () => {
   return (
-    <header className="navbar bg-base-100">
+    <header className="navbar bg-base-100 sticky top-0 z-40">
       <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl" target="/" title="Home">
+        <a
+          className="btn btn-ghost normal-case text-xl"
+          target="/"
+          title="Home"
+        >
           Media Swift
         </a>
       </div>
