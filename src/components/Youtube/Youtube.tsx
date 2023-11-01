@@ -1,6 +1,7 @@
 import React, { ChangeEventHandler, useState } from "react";
 import Img from "next/image";
 import { videoFormat } from "ytdl-core";
+import { useLoading } from "@/hooks/useLoading";
 
 interface Info {
   id: string;
@@ -10,7 +11,8 @@ interface Info {
   formats: videoFormat[];
 }
 const Youtube = () => {
-  
+  const { setLoading } = useLoading();
+
   const [data, setData] = useState({ url: "", format: "" });
   const [info, setInfo] = useState<Info | undefined>(undefined);
 
@@ -19,6 +21,7 @@ const Youtube = () => {
   > = (e) => setData({ ...data, [e.target.id]: e.target.value });
 
   const getInfo = () => {
+    setLoading(true);
     setInfo(undefined);
 
     fetch("/api/youtube/info?url=" + data.url)
@@ -28,12 +31,13 @@ const Youtube = () => {
         setInfo(info);
         setData({ ...data, format: info.formats[0].itag });
 
-        console.log(info.formats);
+        setLoading(false)
       });
   };
 
   const download = async () => {
     if (!info) return;
+    setLoading(true);
 
     const res = await fetch(
       `/api/youtube/download?videoId=${info.id}&&format=${data.format}`
@@ -51,6 +55,7 @@ const Youtube = () => {
     a.click();
 
     window.URL.revokeObjectURL(url);
+    setLoading(false);
   };
 
   const getQuality = (format: videoFormat) => {
