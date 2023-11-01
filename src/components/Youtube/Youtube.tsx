@@ -31,7 +31,7 @@ const Youtube = () => {
         setInfo(info);
         setData({ ...data, format: info.formats[0].itag });
 
-        setLoading(false)
+        setLoading(false);
       });
   };
 

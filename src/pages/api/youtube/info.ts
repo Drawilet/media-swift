@@ -33,7 +33,6 @@ export default async function handler(
     });
     return res.status(200).json(info);
   } catch (error) {
-    console.error(error);
     return res.status(500).json({ error: "Failed to get YouTube info" });
   }
 }
