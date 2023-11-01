@@ -10,6 +10,7 @@ interface Info {
   formats: videoFormat[];
 }
 const Youtube = () => {
+  
   const [data, setData] = useState({ url: "", format: "" });
   const [info, setInfo] = useState<Info | undefined>(undefined);
 
@@ -65,7 +66,9 @@ const Youtube = () => {
 
   return (
     <div className="flex justify-center flex-wrap md:flex-col lg:w-1/2 mx-auto">
-      <h1 className="text-2xl text-center mb-4 w-full font-semibold">Youtube Downloader</h1>
+      <h1 className="text-2xl text-center mb-4 w-full font-semibold">
+        Youtube Downloader
+      </h1>
       <div className="join mb-6 w-full">
         <input
           id="url"
