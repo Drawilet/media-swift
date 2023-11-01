@@ -31,20 +31,20 @@ const HomePage = () => {
           Why Choose Our Video Downloader?
         </h3>
 
-     <div className="flex flex-wrap">
-     {features.map((feature) => (
-          <div
-            className="card bg-base-100 shadow-xl max-w-md mx-auto mt-10"
-            key={feature.title}
-          >
-            <div className="card-body">
-              <i className={`${feature.icon} text-5xl text-center`}></i>
-              <h2 className="card-title">{feature.title}</h2>
-              <p>{feature.description}</p>
+        <div className="flex flex-wrap">
+          {features.map((feature) => (
+            <div
+              className="card bg-base-100 shadow-xl max-w-md mx-auto mt-10"
+              key={feature.title}
+            >
+              <div className="card-body">
+                <i className={`${feature.icon} text-5xl text-center`}></i>
+                <h2 className="card-title">{feature.title}</h2>
+                <p>{feature.description}</p>
+              </div>
             </div>
-          </div>
-        ))}
-     </div>
+          ))}
+        </div>
       </div>
     </>
   );
