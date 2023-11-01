@@ -97,12 +97,13 @@ const Youtube = () => {
             <Img
               src={info.thumbnail}
               alt={info.title}
+              title={info.title}
               width={info.formats[0].width}
               height={info.formats[0].height}
             />
           </figure>
           <div className="card-body">
-            <h2 className="card-title">{info.title}</h2>
+            <span className="card-title">{info.title}</span>
             <p>{info.description}</p>
 
             <div className="join w-full">

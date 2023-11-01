@@ -4,7 +4,7 @@ const Footer = () => {
       <aside>
         <p>
           Copyright © 2023 - All right reserved by{" "}
-          <a href="https://drawilet.me" className="text-primary" target="_blank">@Drawilet</a>
+          <a href="https://drawilet.me" className="text-primary" target="_blank" title="Drawilet">@Drawilet</a>
         </p>
       </aside>
     </footer>

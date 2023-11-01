@@ -1,5 +1,6 @@
 import Youtube from "@/components/Youtube/Youtube";
 import React from "react";
+import { Page } from "../../types/Page";
 
 const features = [
   {
@@ -26,16 +27,15 @@ const features = [
     icon: "fa-solid fa-desktop",
   },
 ];
-
-const HomePage = () => {
+const HomePage: Page = () => {
   return (
     <>
       <Youtube />
 
       <div className="mt-10">
-        <h3 className="text-2xl text-center" id="why-us">
+        <span className="text-2xl text-center block" id="why-us">
           Why Choose Our Video Downloader?
-        </h3>
+        </span>
 
         <div className="flex flex-wrap">
           {features.map((feature) => (

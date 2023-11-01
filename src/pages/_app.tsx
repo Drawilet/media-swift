@@ -4,7 +4,7 @@ import "@/styles/globals.css";
 import Layout from "@/components/Layout/Layout";
 import Loading from "@/components/Loading/Loading";
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component , pageProps }: AppProps) {
   return (
     <>
       <Loading />
