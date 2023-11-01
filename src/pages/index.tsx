@@ -64,12 +64,12 @@ const HomePage = () => {
   };
 
   return (
-    <div className="flex justify-center flex-wrap">
-      <h1 className="text-2xl text-center mb-4">Youtube Video Downloader</h1>
-      <div className="join mb-6 max-sm:w-full">
+    <div className="flex justify-center flex-wrap md:flex-col lg:w-1/2 mx-auto">
+      <h1 className="text-2xl text-center mb-4 w-full">Youtube Downloader</h1>
+      <div className="join mb-6 w-full">
         <input
           id="url"
-          className="input input-bordered join-item max-sm:w-full"
+          className="input input-bordered join-item w-full"
           placeholder="Paste your link here"
           value={data.url}
           onChange={handleChange}
@@ -85,46 +85,43 @@ const HomePage = () => {
 
       {info && (
         <div className="card lg:card-side bg-base-100 shadow-xl max-sm:w-full">
-          <figure className="relative h-48">
+          <figure className="pl-4">
             <Img
               src={info.thumbnail}
-              alt="Video thumbnail"
-              fill
-              objectFit="contain"
-              loading="lazy"
+              alt={info.title}
+              width={info.formats[0].width}
+              height={info.formats[0].height}
             />
           </figure>
           <div className="card-body">
             <h2 className="card-title">{info.title}</h2>
             <p>{info.description}</p>
 
-            <div className="card-actions justify-end">
-              <div className="join">
-                <select
-                  id="format"
-                  value={data.format}
-                  onChange={handleChange}
-                  className="select select-bordered join-item"
-                >
-                  {info.formats.map((format) => (
-                    <option
-                      key={format.itag}
-                      value={format.itag}
-                      className="flex justify-around"
-                    >
-                      {format.mimeType?.split(";")[0].toUpperCase()} (
-                      {getQuality(format)} )
-                    </option>
-                  ))}
-                </select>
+            <div className="join w-full">
+              <select
+                id="format"
+                value={data.format}
+                onChange={handleChange}
+                className="select select-bordered join-item w-full"
+              >
+                {info.formats.map((format) => (
+                  <option
+                    key={format.itag}
+                    value={format.itag}
+                    className="flex justify-around"
+                  >
+                    {format.mimeType?.split(";")[0].toUpperCase()} (
+                    {getQuality(format)})
+                  </option>
+                ))}
+              </select>
 
-                <button
-                  className="btn join-item bg-green-500 hover:bg-green-600 text-gray-100 capitalize"
-                  onClick={download}
-                >
-                  Download
-                </button>
-              </div>
+              <button
+                className="btn join-item bg-green-500 hover:bg-green-600 text-gray-100 capitalize"
+                onClick={download}
+              >
+                Download
+              </button>
             </div>
           </div>
         </div>
