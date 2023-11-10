@@ -16,7 +16,8 @@
     "react-dom": "^18",
     "react-hooks-global-state": "^2.1.0",
     "youtube-sr": "^4.3.9",
-    "ytdl-core": "^4.11.5"
+    "ytdl-core": "^4.11.5",
+    "ytdl-core-muxer": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",

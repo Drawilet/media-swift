@@ -2,8 +2,8 @@ import React, { ChangeEventHandler, useState } from "react";
 import Img from "next/image";
 import { videoFormat } from "ytdl-core";
 
-import { useLoading } from "@/hooks/useLoading";
 import { useNotifications } from "@/hooks/useNotifications";
+import useFetcher from "@/hooks/useFetcher";
 
 interface Info {
   id: string;
@@ -13,8 +13,8 @@ interface Info {
   formats: videoFormat[];
 }
 const Youtube = () => {
-  const { setLoading } = useLoading();
   const { addNotification } = useNotifications();
+  const fetcher = useFetcher();
 
   const [data, setData] = useState({ url: "", format: "" });
   const [info, setInfo] = useState<Info | undefined>(undefined);
@@ -23,65 +23,19 @@ const Youtube = () => {
     HTMLInputElement | HTMLSelectElement
   > = (e) => setData({ ...data, [e.target.id]: e.target.value });
 
-  const getInfo = () => {
-    setLoading(true);
+  const getInfo = async () => {
     setInfo(undefined);
 
-    try {
-      fetch("/api/youtube/info?url=" + data.url)
-        .then((res) => res.json())
-        .then((info) => {
-          setLoading(false);
-
-          if (info.error)
-            return addNotification({
-              type: "error",
-              message: info.error,
-              icon: "fa-solid fa-xmark",
-            });
-
-          setInfo(info);
-          setData({ ...data, format: info.formats[0].itag });
-        });
-    } catch (e) {
-      addNotification({
+    const [res, json] = await fetcher("/api/youtube/info?url=" + data.url);
+    if (!res.ok)
+      return addNotification({
         type: "error",
-        message: e as string,
+        message: `${json.error}`,
         icon: "fa-solid fa-xmark",
       });
-      setLoading(false);
-    }
-  };
 
-  const download = async () => {
-    if (!info) return;
-    setLoading(true);
-
-    try {
-      const res = await fetch(
-        `/api/youtube/download?videoId=${info.id}&&format=${data.format}`
-      );
-      const blob = await res.blob();
-
-      const url = window.URL.createObjectURL(blob);
-      const filename = `${info.title}.${blob.type.split("/")[1]}`;
-
-      const a = document.createElement("a");
-      a.style.display = "none";
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-
-      window.URL.revokeObjectURL(url);
-    } catch (e) {
-      addNotification({
-        type: "error",
-        message: "An error occured while downloading the video",
-        icon: "fa-solid fa-xmark",
-      });
-    }
-    setLoading(false);
+    setInfo(json);
+    setData({ ...data, format: json.formats[0].itag });
   };
 
   const getQuality = (format: videoFormat) => {
@@ -151,12 +105,18 @@ const Youtube = () => {
                 ))}
               </select>
 
-              <button
+              <a
                 className="btn join-item bg-green-500 hover:bg-green-600 text-gray-100 capitalize"
-                onClick={download}
+                href={
+                  "/api/youtube/download?videoId=" +
+                  info.id +
+                  "&&format=" +
+                  data.format
+                }
+                target="_blank"
               >
                 Download
-              </button>
+              </a>
             </div>
           </div>
         </div>
