@@ -52,7 +52,7 @@ const Youtube = () => {
   return (
     <div className="flex justify-center flex-wrap md:flex-col lg:w-1/2 mx-auto">
       <h1 className="text-2xl text-center mb-4 w-full font-semibold">
-        Youtube Downloader
+        Free YouTube Video Downloader
       </h1>
       <div className="join mb-6 w-full">
         <input
