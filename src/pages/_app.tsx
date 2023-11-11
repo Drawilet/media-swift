@@ -1,6 +1,5 @@
 import type { AppProps } from "next/app";
 
-import Layout from "@/components/Layout/Layout";
 import Loading from "@/components/Loading/Loading";
 import Notifications from "@/components/Notifications/Notifications";
 
@@ -11,9 +10,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Notifications />
       <Loading />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+
+      <Component {...pageProps} />
     </>
   );
 }

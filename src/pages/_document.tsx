@@ -4,8 +4,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>Free YouTube Video Downloader - Media Swift</title>
-
         <meta
           name="description"
           content="Download YouTube videos safely and quickly with Media Swift. Optimize your download experience with our free application."

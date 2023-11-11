@@ -1,7 +1,8 @@
 import { Component } from "types/Component";
+import React from "react";
 
 import Youtube from "@/components/Youtube/Youtube";
-import React from "react";
+import Layout from "@/components/Layout/Layout";
 
 const features = [
   {
@@ -28,9 +29,10 @@ const features = [
     icon: "fa-solid fa-desktop",
   },
 ];
+
 const HomePage: Component = () => {
   return (
-    <>
+    <Layout title="Free YouTube Video Downloader">
       <Youtube />
 
       <div className="mt-10">
@@ -53,7 +55,7 @@ const HomePage: Component = () => {
           ))}
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 
