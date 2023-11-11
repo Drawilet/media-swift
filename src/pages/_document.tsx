@@ -4,12 +4,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <meta name="author" content="drawilet" />
-
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <meta name="robots" content="index, follow" />
-
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -87,9 +81,6 @@ export default function Document() {
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="msapplication-TileColor" content="#ffffff" />
-        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-        <meta name="theme-color" content="#ffffff" />
       </Head>
       <body className="bg-base-100">
         <Main />

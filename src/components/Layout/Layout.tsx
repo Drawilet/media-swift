@@ -1,27 +1,18 @@
-import { Component } from "../../../types/Component";
-import Head from "next/head";
+import { Meta } from "types/Meta";
+import { Component } from "types/Component";
+
 import React from "react";
 
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
+import Head from "./Head";
 
 const Layout: Component<{
-  meta?: {
-    title?: string;
-    description?: string;
-    keywords?: string;
-  };
+  meta?: Meta;
 }> = ({ children, meta }) => {
   return (
     <>
-      <Head>
-        <title>{meta?.title ? `${meta.title} -` : ""} Media Swift</title>
-
-        <meta name="description" content={meta?.description} />
-
-        <meta name="keywords" content={meta?.keywords + " , Media Swift"} />
-      </Head>
-
+    <Head  meta={meta}/>
       <Header />
       <main className="px-10 py-2 ">{children}</main>
       <Footer />
