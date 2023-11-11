@@ -18,8 +18,7 @@
     "react-dom": "^18",
     "react-hooks-global-state": "^2.1.0",
     "youtube-sr": "^4.3.9",
-    "ytdl-core": "^4.11.5",
-    "ytdl-core-muxer": "^1.0.1"
+    "ytdl-core": "^4.11.5"
   },
   "devDependencies": {
     "@types/fluent-ffmpeg": "^2.1.24",
