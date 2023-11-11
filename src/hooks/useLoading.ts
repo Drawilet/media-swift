@@ -1,7 +1,7 @@
 import { useGlobalState } from "@/state/global";
 
 export const useLoading = () => {
-  const [isLoading, setLoading] = useGlobalState("isLoading");
+  const setLoading = useGlobalState("isLoading")[1];
 
   return {
     setLoading,

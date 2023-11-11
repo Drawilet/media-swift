@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useLoading } from "./useLoading";
 
 const useFetcher = () => {

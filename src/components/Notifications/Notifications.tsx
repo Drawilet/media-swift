@@ -7,11 +7,10 @@ const Notifications: Component = () => {
   const [notifications, setNotifications] = useGlobalState("notifications");
 
   useEffect(() => {
-    if (notifications.length > 0) {
+    if (notifications.length > 0)
       setTimeout(() => {
         setNotifications((notifications) => notifications.slice(1));
       }, 5000);
-    }
 
     return () => {};
   }, []);

@@ -1,6 +1,7 @@
+import { Component } from "types/Component";
+
 import Youtube from "@/components/Youtube/Youtube";
 import React from "react";
-import { Page } from "../../types/Page";
 
 const features = [
   {
@@ -27,7 +28,7 @@ const features = [
     icon: "fa-solid fa-desktop",
   },
 ];
-const HomePage: Page = () => {
+const HomePage: Component = () => {
   return (
     <>
       <Youtube />

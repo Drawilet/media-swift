@@ -9,9 +9,7 @@ export default async function handler(
 ) {
   const { url } = req.query;
 
-  if (!url) {
-    return res.status(400).json({ error: "Missing URL parameter" });
-  }
+  if (!url) return res.status(400).json({ error: "Missing URL parameter" });
 
   try {
     const info = await ytdl.getInfo(url as string).then((info) => {
