@@ -1,6 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import ytmux from "ytdl-core-muxer";
+import ffmpeg from "fluent-ffmpeg";
+import { path as ffmpegPath } from "@ffmpeg-installer/ffmpeg";
 import ytdl from "ytdl-core";
+
+ffmpeg.setFfmpegPath(ffmpegPath);
 
 export const config = {
   api: {

@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "classnames": "^2.3.2",
     "daisyui": "^3.9.4",
+    "fluent-ffmpeg": "^2.1.2",
     "next": "14.0.1",
     "react": "^18",
     "react-dom": "^18",
@@ -20,6 +22,7 @@
     "ytdl-core-muxer": "^1.0.1"
   },
   "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.24",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
