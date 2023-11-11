@@ -32,7 +32,15 @@ const features = [
 
 const HomePage: Component = () => {
   return (
-    <Layout title="Free YouTube Video Downloader">
+    <Layout
+      meta={{
+        title: "Free YouTube Video Downloader",
+        description:
+          "Download YouTube videos safely and quickly with Media Swift. Optimize your download experience with our free application.",
+        keywords:
+          "YouTube downloader, download YouTube videos, video download, secure video download",
+      }}
+    >
       <Youtube />
 
       <div className="mt-10">

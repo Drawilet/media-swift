@@ -5,11 +5,21 @@ import React from "react";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 
-const Layout: Component<{ title?: string }> = ({ children, title }) => {
+const Layout: Component<{
+  meta?: {
+    title?: string;
+    description?: string;
+    keywords?: string;
+  };
+}> = ({ children, meta }) => {
   return (
     <>
       <Head>
-        <title>{title ? `${title} -` : ""} Media Swift</title>
+        <title>{meta?.title ? `${meta.title} -` : ""} Media Swift</title>
+
+        <meta name="description" content={meta?.description} />
+
+        <meta name="keywords" content={meta?.keywords + " , Media Swift"} />
       </Head>
 
       <Header />
