@@ -4,6 +4,20 @@ import { videoFormat } from "ytdl-core";
 
 import { useNotifications } from "@/hooks/useNotifications";
 import useFetcher from "@/hooks/useFetcher";
+import { useI18n } from "@drawilet/nextjs-i18n";
+
+export const _i18n = {
+  title: "Free YouTube Video Downloader",
+  search: "Search",
+  search_placeholder: "Paste your link here",
+
+  download: "Download",
+
+  AUDIO_QUALITY_LOW: "Low",
+  AUDIO_QUALITY_MEDIUM: "Medium",
+  AUDIO_QUALITY_HIGH: "High",
+  AUDIO_QUALITY_UNKNOWN: "Unknown",
+};
 
 interface Info {
   id: string;
@@ -13,6 +27,8 @@ interface Info {
   formats: videoFormat[];
 }
 const Youtube = () => {
+  const i18n = useI18n("components", "/Youtube/Youtube");
+
   const { addNotification } = useNotifications();
   const fetcher = useFetcher();
 
@@ -40,25 +56,22 @@ const Youtube = () => {
 
   const getQuality = (format: videoFormat) => {
     if (format.qualityLabel) return format.qualityLabel;
-    if (format.audioQuality) {
-      if (format.audioQuality === "AUDIO_QUALITY_LOW") return "Low";
-      if (format.audioQuality === "AUDIO_QUALITY_MEDIUM") return "Medium";
-      if (format.audioQuality === "AUDIO_QUALITY_HIGH") return "High";
-    }
+    if (format.audioQuality) return i18n(format.audioQuality);
+
     if (format.quality) return format.quality;
-    return "Unknown";
+    return i18n("AUDIO_QUALITY_UNKNOWN");
   };
 
   return (
     <div className="flex justify-center flex-wrap md:flex-col lg:w-1/2 mx-auto">
       <h1 className="text-2xl text-center mb-4 w-full font-semibold">
-        Free YouTube Video Downloader
+        {i18n("title")}
       </h1>
       <div className="join mb-6 w-full">
         <input
           id="url"
           className="input input-bordered join-item w-full"
-          placeholder="Paste your link here"
+          placeholder={i18n("search_placeholder")}
           value={data.url}
           onChange={handleChange}
         />
@@ -67,7 +80,7 @@ const Youtube = () => {
           className="btn btn-primary join-item capitalize"
           onClick={getInfo}
         >
-          Search
+          {i18n("search")}
         </button>
       </div>
 
@@ -115,7 +128,7 @@ const Youtube = () => {
                 }
                 target="_blank"
               >
-                Download
+                {i18n("download")}
               </a>
             </div>
           </div>

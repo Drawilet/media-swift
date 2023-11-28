@@ -1,10 +1,17 @@
-import { Component } from "../../../../types/Component";
+import { useI18n } from "@drawilet/nextjs-i18n";
+import { Component } from "types/Component";
 
 import Img from "next/image";
 
-const links = [{ label: "Why Us?", href: "/#why-us" }];
+const links = [{ label: "why_us", href: "/#why-us" }];
+
+export const _i18n = {
+  why_us: "Why Us?",
+};
 
 const Header: Component = () => {
+  const i18n = useI18n("components", "/Layout/Header/Header");
+
   return (
     <header className="navbar bg-base-100 sticky top-0 z-40 px-2 py-0 shadow-sm mb-3">
       <div className="flex-1">
@@ -23,7 +30,9 @@ const Header: Component = () => {
           <span className="flex flex-col">
             Media Swift
             {process.env.NODE_ENV != "production" && (
-              <span className="text-sm opacity-80 -mt-2 capitalize">{process.env.NODE_ENV}</span>
+              <span className="text-sm opacity-80 -mt-2 capitalize">
+                {process.env.NODE_ENV}
+              </span>
             )}
           </span>
         </a>
@@ -33,7 +42,7 @@ const Header: Component = () => {
           {links.map((link) => (
             <li key={link.label}>
               <a href={link.href} title={link.label}>
-                {link.label}
+                {i18n(link.label)}
               </a>
             </li>
           ))}

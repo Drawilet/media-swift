@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@drawilet/i18n": "^1.0.5",
+    "@drawilet/nextjs-i18n": "^0.0.14",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "classnames": "^2.3.2",
     "daisyui": "^3.9.4",
